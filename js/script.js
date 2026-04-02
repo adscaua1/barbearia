@@ -20,7 +20,7 @@ let horarioSelecionado = null;
 let servicoSelecionado = null;
 let ocupados = [];
 
-// 🔥 SEU NÚMERO FIXO (IMPORTANTE)
+// 💖 SEU NÚMERO
 const numeroDono = "5512988070269";
 
 // inputs
@@ -103,7 +103,7 @@ async function renderizar(data) {
     });
 }
 
-// 🔥 AGENDAR (ENVIA PRA VOCÊ)
+// 🔥 AGENDAR
 document.getElementById("agendar").onclick = async () => {
     const nome = nomeInput.value;
     const tel = telInput.value;
@@ -114,7 +114,6 @@ document.getElementById("agendar").onclick = async () => {
         return;
     }
 
-    // evitar duplicado
     if (ocupados.includes(horarioSelecionado)) {
         mostrarBanner("Horário já ocupado!");
         return;
@@ -134,25 +133,23 @@ document.getElementById("agendar").onclick = async () => {
         status: "pendente"
     });
 
-    // 💖 MENSAGEM PRA VOCÊ
+    // 💖 MENSAGEM BONITA (FUNCIONANDO)
     const msg = encodeURIComponent(
-        `💖 NOVO AGENDAMENTO
-
-👩 Cliente: ${nome}
-📞 Telefone: ${tel}
-
-📅 Data: ${data}
-⏰ Hora: ${horarioSelecionado}
-💅 Serviço: ${servicoSelecionado.nome}
-💰 Valor: R$${servicoSelecionado.preco}`
+        "💖 NOVO AGENDAMENTO%0A%0A" +
+        "👩 Cliente: " + nome + "%0A" +
+        "📞 Telefone: " + tel + "%0A%0A" +
+        "📅 Data: " + data + "%0A" +
+        "⏰ Hora: " + horarioSelecionado + "%0A" +
+        " Serviço: " + servicoSelecionado.nome + "%0A" +
+        " Valor: R$" + servicoSelecionado.preco + "%0A%0A" +
+        "✨ Agendado pelo sistema"
     );
 
     const link = `https://wa.me/${numeroDono}?text=${msg}`;
 
-    // abre seu WhatsApp
     window.open(link, "_blank");
 
-    mostrarBanner("✅ Agendamento enviado!");
+    mostrarBanner("💖 Agendamento enviado!");
 
     window.scrollTo({ top: 0, behavior: "smooth" });
 
